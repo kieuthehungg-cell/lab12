@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopABC - Liên hệ</title>
+  </head>
+  <style>
+    :root {
+      /* Giao diện sáng (Default) */
+      --bg-primary: #f8f9fa;
+      --bg-surface: #ffffff;
+      --text-primary: #212529;
+      --text-secondary: #6c757d;
+      --border-color: #e9ecef;
+
+      /* Màu chủ đạo */
+      --accent-color: #2563eb;
+      --accent-hover: #1d4ed8;
+
+      /* Đổ bóng & Động cơ transition */
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --transition-speed: 0.3s;
+
+      /* Bo góc & Bố cục */
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --max-width: 1200px;
+    }
+
+    /* Giao diện tối (Dark Mode) */
+    body.dark-theme {
+      --bg-primary: #0f172a;
+      --bg-surface: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border-color: #334155;
+    }
+    /* --- Reset --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition:
+        background-color var(--transition-speed),
+        color var(--transition-speed);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- Navigation Bar --- */
+    .navbar {
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 500;
+      transition: color var(--transition-speed);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-color);
+    }
+
+    #btnToggleTheme {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all var(--transition-speed);
+    }
+
+    #btnToggleTheme:hover {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border-color: var(--accent-color);
+    }
+
+    /* --- Page Container --- */
+    .page-container {
+      max-width: var(--max-width);
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* --- Form Liên hệ (form-card) --- */
+    .form-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+      transition:
+        background-color var(--transition-speed),
+        border-color var(--transition-speed);
+    }
+
+    .form-card fieldset {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-card legend {
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0 0.5rem;
+      color: var(--accent-color);
+    }
+
+    .form-card label {
+      display: block;
+      font-weight: 500;
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+    }
+
+    .form-card label:first-of-type {
+      margin-top: 0;
+    }
+
+    .form-card input[type="text"],
+    .form-card input[type="email"],
+    .form-card input[type="tel"],
+    .form-card textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      outline: none;
+      transition:
+        border-color var(--transition-speed),
+        box-shadow var(--transition-speed);
+    }
+
+    .form-card input:focus,
+    .form-card textarea:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .form-card textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-card button[type="submit"] {
+      width: 100%;
+      padding: 0.85rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: var(--accent-color);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition:
+        background-color var(--transition-speed),
+        transform 0.1s;
+    }
+
+    .form-card button[type="submit"]:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .form-card button[type="submit"]:active {
+      transform: scale(0.99);
+    }
+
+    .page-container a[href^="tel:"] {
+      color: var(--accent-color);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .page-container a[href^="tel:"]:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Footer --- */
+    .site-footer {
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: auto;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      .nav-links {
+        gap: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-container {
+        padding: 0 1rem;
+      }
+
+      .form-card {
+        padding: 1.25rem;
+      }
+
+      .form-card fieldset {
+        padding: 1rem;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btnToggleTheme = document.getElementById("btnToggleTheme");
+      const body = document.body;
+
+      // Kiểm tra trạng thái theme từ localStorage
+      if (localStorage.getItem("theme") === "dark") {
+        body.classList.add("dark-theme");
+        btnToggleTheme.textContent = "☀️ Sáng";
+      }
+
+      btnToggleTheme.addEventListener("click", function () {
+        body.classList.toggle("dark-theme");
+        if (body.classList.contains("dark-theme")) {
+          btnToggleTheme.textContent = "☀️ Sáng";
+          localStorage.setItem("theme", "dark");
+        } else {
+          btnToggleTheme.textContent = "🌙 Tối";
+          localStorage.setItem("theme", "light");
+        }
+      });
+    });
+  </script>
+  <body>
+    <header class="navbar">
+      <a href="Buoi_12_bai_1_index.html" class="logo">ShopABC</a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="Untitled-26.html  ">Trang chủ</a></li>
+          <li><a href="Untitled-24.html">Sản phẩm</a></li>
+          <li><a href="Untitled-25.html">Liên hệ</a></li>
+        </ul>
+      </nav>
+      <button id="btnToggleTheme">🌙 Tối</button>
+    </header>
+
+    <main class="page-container">
+      <h1 style="text-align: center; margin-bottom: 24px">
+        Liên hệ với chúng tôi
+      </h1>
+
+      <form class="form-card" action="#" method="post">
+        <fieldset>
+          <legend>Thông tin liên hệ</legend>
+
+          <label for="hoten"
+            >Họ và tên: <span style="color: #e74c3c">*</span></label
+          >
+          <input
+            type="text"
+            id="hoten"
+            name="hoten"
+            placeholder="Nguyễn Văn A"
+            required
+          />
+
+          <label for="email"
+            >Email: <span style="color: #e74c3c">*</span></label
+          >
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="ten@example.com"
+            required
+          />
+
+          <label for="phone"
+            >Số điện thoại: <span style="color: #e74c3c">*</span></label
+          >
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            pattern="[0-9]{10}"
+            title="Nhập đúng 10 số điện thoại"
+            placeholder="0912345678"
+            required
+          />
+
+          <label for="noidung"
+            >Nội dung: <span style="color: #e74c3c">*</span></label
+          >
+          <textarea
+            id="noidung"
+            name="noidung"
+            rows="4"
+            placeholder="Bạn cần hỗ trợ vấn đề gì?"
+            required
+          ></textarea>
+        </fieldset>
+
+        <button type="submit">Gửi liên hệ</button>
+      </form>
+
+      <p
+        style="
+          text-align: center;
+          margin-top: 24px;
+          color: var(--text-secondary);
+        "
+      >
+        Hoặc gọi trực tiếp: <a href="tel:19001234">1900 1234</a>
+      </p>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 ShopABC — Đồ án tổng hợp Buổi 12</p>
+    </footer>
+
+    <script src="Buoi_12_bai_1_js_theme.js"></script>
+  </body>
+</html>
